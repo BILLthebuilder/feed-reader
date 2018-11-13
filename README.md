@@ -5,6 +5,8 @@ The app logic is contained within `js/app.js` incase you want to modify it
 
 The tests are located in `jasmine/spec/feedreader.js` if you want to modify them 
 
+To run the application use [this link](https://billthebuilder.github.io/feed-reader-testing/) and make sure to enable it to load scripts from unauthenticated sources if you get a blank page
+
 To run the application locally:
 
 * Make sure you have git installed
