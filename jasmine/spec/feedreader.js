@@ -109,7 +109,7 @@ $(function() {
          });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
-    describe('New Feed Selection', function() {
+    describe('New Feed Selection', ()=> {
         const feed = document.querySelector('.feed');
         const firstFeed = [];
         /* TODO: Write a test that ensures when a new feed is loaded
@@ -124,7 +124,7 @@ $(function() {
             loadFeed(1,done);
         });
 
-        it('content changes', function() {
+        it('content changes', ()=> {
             Array.from(feed.children).forEach((entry,index)=>{
                 expect(entry.innerText === firstFeed[index]).toBe(false);
             });
