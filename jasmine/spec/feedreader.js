@@ -91,8 +91,9 @@ $(function() {
          
          //Checks that loadedFeed() has loaded the correct elements to the DOM
          it('completes work',()=> {
-            const feed = document.querySelector('.feed');
-            expect(feed.children.length > 0).toBe(true);
+             const feed = document.querySelectorAll('.feed .entry');
+             //expect(feed.children.length > 0).toBe(true);
+             expect(feed.length).toBeGreaterThan(0);
          });
     });
  
@@ -106,15 +107,13 @@ $(function() {
          * loadFeed() is asynchronous.
          */
         beforeEach(done=> {
-            // the first feed is loaded
-            loadFeed(0);
-            // store the values of the first feed and convert them into an array
-            Array.from(feed.children).forEach(entry=> {
+            // Load the first feed and convert its values to an array
+            loadFeed(0,()=>{
+                Array.from(feed.children).forEach(entry=> {
                 firstFeed.push(entry.innerText);
-            });
-            // The second feed is loaded
-            loadFeed(1,done);
-        });
+                });
+             // Load the second feed and pass done as a callback
+            },loadFeed(1,done));
      
         /* a test that ensures when a new feed is loaded by the loadFeed() 
         function that the content in the feed actually changes*/
