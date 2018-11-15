@@ -107,19 +107,24 @@ $(function() {
          * loadFeed() is asynchronous.
          */
         beforeEach(done=> {
-            // Load the first feed and convert its values to an array
-            loadFeed(0,()=>{
+            /*Load the first feed,pass in its stored values
+            * Load the second feed and pass in done as its callback
+            */
+            loadFeed(0,storedValues,loadFeed(1,done));}
+            );
+             
+             //Stores the values of the first feed into an array
+            function storedValues(){
                 Array.from(feed.children).forEach(entry=> {
-                firstFeed.push(entry.innerText);
+                firstFeed.push(entry.innerText); 
                 });
-             // Load the second feed and pass done as a callback
-            },loadFeed(1,done));
+            }
      
         /* a test that ensures when a new feed is loaded by the loadFeed() 
         function that the content in the feed actually changes*/
         it('content changes', ()=> {
             Array.from(feed.children).forEach((entry,index)=>{
-                expect(entry.innerText === firstFeed[index]).toBe(false);
+            expect(entry.innerText === firstFeed[index]).toBe(false);
             });
             
         });
