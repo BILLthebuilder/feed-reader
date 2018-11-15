@@ -30,19 +30,19 @@ $(function() {
         /*This a test that loops through each feed in the allFeeds object 
          and ensures it has a URL defined*/
          it('url is defined',()=> {
-            for(let feed of allFeeds){
+            allFeeds.forEach(feed => {
                 expect(feed.url).toBeDefined(); // makes sure that the URL is defined
                 expect(feed.url.length).not.toBe(0); // makes sure that the URL is not empty
-            }
+            });
          });
      
         /* A test that loops through each feed
           in the allFeeds object */
          it('name is defined',()=> {
-            for(let feed of allFeeds){
+            allFeeds.forEach(feed => {
                 expect(feed.name).toBeDefined(); //ensures it has a name defined
                 expect(feed.name.length).not.toBe(0);// ensures that the name is not empty
-            }
+            });
          });
     });
  
@@ -110,8 +110,16 @@ $(function() {
             /*Load the first feed,pass in its stored values
             * Load the second feed and pass in done as its callback
             */
-            loadFeed(0,storedValues,loadFeed(1,done));}
-            );
+            //loadFeed(0,storedValues,loadFeed(1,done));}
+            loadFeed(0,function(){
+                const feedOne = storedValues;
+                loadFeed(1,function(){
+                const feedTwo = storedValues;
+                done();
+                });
+            });
+            
+        });
              
              //Stores the values of the first feed into an array
             function storedValues(){
